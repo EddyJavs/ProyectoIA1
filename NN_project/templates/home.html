@@ -1,0 +1,81 @@
+{% extends '_base.html' %} 
+{% load static %}
+{% block title %}Citas{% endblock %}
+{% block css %}
+
+{% endblock css %}
+{% block content %} 
+    
+    <div class="calendar">
+        <h1>
+            <label for="searchCalendar">Redes Neuronales</label>
+            <br>
+            <br>
+        </h1>
+        
+        
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>ESCUELA DE CIENCIAS Y SISTEMAS</h2>
+                <br><br>
+                <h3>Ingrese los datos del estudiante:</h3>
+                <br><br>
+                <form action="{% url 'NeuronalNetwork'  %}" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  
+                    
+                      <label for="inputEmail4">Genero</label>
+                      <select class="form-control" id="generoid" name="genero">
+                        <option selected>Masculino</option>
+                        <option>Femenino</option>
+                      </select>
+                   
+                    
+                      <label >Edad</label>
+                      <input type="text" class="form-control" id = "edadid" name="edad" >
+                  
+                    
+                    
+                      <label >Anio de inscripcion</label>
+                      <input type="text" class="form-control"  id="anioid" name="anio">
+                    
+                      <label >Departamento</label>
+                      <select id="inputState" class="form-control" name="departamento">
+                        {% for departamento in deptos %}
+                          <option>{{departamento}}</option>
+                        {% endfor %}
+                      </select>
+                    
+                  <label >Municipio</label>
+                  <select id="inputState2" class="form-control" name="municipio">
+                    {% for mun in muns %}
+                      <option>{{mun}}</option>
+                    {% endfor %}
+                  </select>
+                      <br><br>
+                      <input type="submit" class="btn btn-primary" value="Realizar prediccion">
+                </form>
+                
+            </div>
+          </div>
+          {% if msj %}
+          <h4> {{msj}}</h4>
+          {% endif %}
+        
+      </div>
+      
+ {% endblock  %}
+
+
+{% block js %}
+    <script>
+        function OpenModal(){
+            $("#staticBackdrop").modal("show");
+        }      
+    </script>
+    <script>
+      alert('{{ message }}');
+  </script>
+{% endblock js %}
